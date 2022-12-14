@@ -1,0 +1,32 @@
+html,body {
+    min-height:100%;
+    margin: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+}
+/* canvas, svg {
+    border: 1px solid #aaa;
+    fill: #004D71;
+} */
+
+/* #circle {
+    fill: #004D71;
+} */
+
+#circle1 {
+    stroke: #3A8DDD;
+    /* background-color: #004D71; */
+    background: #004D71;
+    width: 900px;
+    height: 300px;
+}
+
+#circle2 {
+    stroke: #004D71;
+    width:900px;
+    height:300px;
+    z-index: 10;
+}
