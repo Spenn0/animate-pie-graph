@@ -7,18 +7,8 @@ html,body {
     bottom: 0;
     left: 0;
 }
-/* canvas, svg {
-    border: 1px solid #aaa;
-    fill: #004D71;
-} */
-
-/* #circle {
-    fill: #004D71;
-} */
-
 #circle1 {
     stroke: #3A8DDD;
-    /* background-color: #004D71; */
     background: #004D71;
     width: 900px;
     height: 300px;

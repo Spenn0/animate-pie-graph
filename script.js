@@ -26,7 +26,6 @@ let percentage = 70;
 function setAmnt(percentage){
 // this function needs to take the user inputted percentage
 // then find the equivalant of the percentage to a base of 2
-// 2 == 100%
 amnt = percentage * 2 /100
 return amnt
 }
