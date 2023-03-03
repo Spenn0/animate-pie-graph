@@ -18,8 +18,9 @@ let length = Math.PI * 2 * radius;
 let dash = { offset: length };
 
 let amnt = 0;
-let percentage = 90;
-
+let percentage = 70;
+// count up white numbers in front of the pie 
+// and animate at the same time
 
 //math
 function setAmnt(percentage){
@@ -31,11 +32,11 @@ return amnt
 }
 setAmnt(percentage);
 
-TweenLite.set(circle1, {attr: {cx: cx1, cy: cy, r: radius}});
-TweenLite.set(circle2, {attr: {cx: cx1, cy: cy, r: radius}});
+// TweenLite.set(circle1, {attr: {cx: cx1, cy: cy, r: radius}});
+// TweenLite.set(circle2, {attr: {cx: cx1, cy: cy, r: radius}});
 
 context.strokeStyle = "#3A8DDD";
-context.fillStyle = "#004D71";
+// context.fillStyle = "#004D71";
 context.lineWidth = radius * 2;
 
 TweenMax.to(dash, 5, {
@@ -47,22 +48,42 @@ TweenMax.to(dash, 5, {
     ease: Linear.easeNone
 });
 
-
-drawPath();
-
-
+// drawPath();
 
 function drawPath() {
+  context.clearRect(0,0,canvas.width,canvas.height);
   // context.setLineDash([length - dash.offset, dash.offset]);
   context.beginPath();
   context.arc(cx1, cy, radius * 2, 0, Math.PI * 2);
   context.fillStyle = "#004D71";
   context.fill();
-
-
   context.setLineDash([length - dash.offset, dash.offset]);
   context.beginPath();
   context.arc(cx1, cy, radius, 0, Math.PI * amnt);
   context.stroke();
-
 }
+
+function animateValue(obj, start, end, duration) {
+  let startTimestamp = null;
+  const step = (timestamp) => {
+    if (!startTimestamp) startTimestamp = timestamp;
+    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+    obj.innerHTML = Math.floor(progress * (end - start) + start);
+    if (progress < 1) {
+      window.requestAnimationFrame(step);
+    }
+  };
+  window.requestAnimationFrame(step);
+}
+
+const obj = document.getElementById("numbers");
+obj.style.fontFamily = "Montserrat";
+obj.style.fontSize = "100px";
+obj.style.position = "fixed";
+obj.style.left = "90px";
+obj.style.top = "90px";
+obj.style.color = "white";
+
+
+
+animateValue(obj, 0, percentage, 3000);

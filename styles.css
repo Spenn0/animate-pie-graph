@@ -30,3 +30,13 @@ html,body {
     height:300px;
     z-index: 10;
 }
+
+#value {
+    height: 50px;
+}
+
+.numbers {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    color:black;
+}
