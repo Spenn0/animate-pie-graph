@@ -21,6 +21,7 @@ let amnt = 0;
 let percentage = 79;
 // count up white numbers in front of the pie 
 // and animate at the same time
+let pi = Math.PI;
 
 //math
 function setAmnt(percentage){
@@ -31,61 +32,44 @@ return amnt
 }
 setAmnt(percentage);
 
-// TweenLite.set(circle1, {attr: {cx: cx1, cy: cy, r: radius}});
-// TweenLite.set(circle2, {attr: {cx: cx1, cy: cy, r: radius}});
-
 context.strokeStyle = "#3A8DDD";
 // context.fillStyle = "#004D71";
 context.lineWidth = radius * 2;
+context.fillStyle = "#004D71";
 
-TweenMax.to(dash, 5, {
+const tween = TweenMax.to(dash, 5, {
     offset:0,
     onUpdate: drawPath,
-    // repeat: -1,
-    repeatDelay: 0.5,
-    yoyo: true,
     ease: Linear.easeNone
 });
 
-// drawPath();
-
 function drawPath() {
+  const progress = Math.round(tween.progress() * 100);
   context.clearRect(0,0,canvas.width,canvas.height);
-  // context.setLineDash([length - dash.offset, dash.offset]);
+  progress <= percentage ?  obj.innerHTML = progress : ""
   context.beginPath();
-  context.arc(cx1, cy, radius * 2, 0, Math.PI * 2);
-  context.fillStyle = "#004D71";
+  context.arc(cx1, cy, radius * 2, 0, pi * 2);
   context.fill();
   context.setLineDash([length - dash.offset, dash.offset]);
   context.beginPath();
-  context.arc(cx1, cy, radius, 0, Math.PI * amnt);
+  context.arc(cx1, cy, radius, 0, pi * amnt);
   context.stroke();
 }
 
 // for reference https://css-tricks.com/animating-number-counters/
 
-function animateValue(obj, start, end, duration) {
-  let startTimestamp = null;
-  const step = (timestamp) => {
-    if (!startTimestamp) startTimestamp = timestamp;
-    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-    obj.innerHTML = Math.floor(progress * (end - start) + start) + "%";
-    if (progress < 1) {
-      window.requestAnimationFrame(step);
-    }
-  };
-  window.requestAnimationFrame(step);
-}
-
 const obj = document.getElementById("numbers");
+const percentageSign = document.getElementById("percentage-sign");
 obj.style.fontFamily = "Montserrat";
 obj.style.fontSize = "85px";
 obj.style.position = "fixed";
 obj.style.left = "70px";
 obj.style.top = "95px";
 obj.style.color = "white";
-obj.style.width = "300px"
-
-
-
-animateValue(obj, 0, percentage, 2000);
+// obj.style.width = "300px"
+percentageSign.style.fontFamily = "Montserrat";
+percentageSign.style.fontSize = "85px";
+percentageSign.style.position = "fixed";
+percentageSign.style.left = "183px";
+percentageSign.style.top = "95px";
+percentageSign.style.color = "white";
