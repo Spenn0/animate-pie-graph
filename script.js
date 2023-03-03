@@ -18,7 +18,7 @@ let length = Math.PI * 2 * radius;
 let dash = { offset: length };
 
 let amnt = 0;
-let percentage = 70;
+let percentage = 79;
 // count up white numbers in front of the pie 
 // and animate at the same time
 
@@ -62,12 +62,14 @@ function drawPath() {
   context.stroke();
 }
 
+// for reference https://css-tricks.com/animating-number-counters/
+
 function animateValue(obj, start, end, duration) {
   let startTimestamp = null;
   const step = (timestamp) => {
     if (!startTimestamp) startTimestamp = timestamp;
     const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-    obj.innerHTML = Math.floor(progress * (end - start) + start);
+    obj.innerHTML = Math.floor(progress * (end - start) + start) + "%";
     if (progress < 1) {
       window.requestAnimationFrame(step);
     }
@@ -77,12 +79,13 @@ function animateValue(obj, start, end, duration) {
 
 const obj = document.getElementById("numbers");
 obj.style.fontFamily = "Montserrat";
-obj.style.fontSize = "100px";
+obj.style.fontSize = "85px";
 obj.style.position = "fixed";
-obj.style.left = "90px";
-obj.style.top = "90px";
+obj.style.left = "70px";
+obj.style.top = "95px";
 obj.style.color = "white";
+obj.style.width = "300px"
 
 
 
-animateValue(obj, 0, percentage, 3000);
+animateValue(obj, 0, percentage, 2000);
